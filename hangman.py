@@ -1,9 +1,41 @@
-import tkinter
+import pygame
+import pygame.display
+import pygame.image
+import pygame.transform
 
-window = tkinter.Tk()  
-window.geometry('600x600')  
-window.title('Hangman')
-window.mainloop()
+pygame.init()
+
+background = pygame.image.load("h0.png")
+background = pygame.transform.scale(background,(1000, 1000))
+
+screen_width = background.get_width()
+screen_height = background.get_height()
+screen = pygame.display.set_mode((screen_width, screen_height))
+
+while True:
+    screen.fill((102,2,60))
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit(0)
+    screen.blit(background,(0,0))
+    pygame.display.update()
+# import tkinter
+# from PIL import Image, ImageTk
+
+# window = tkinter.Tk()  
+# window.geometry('600x600')  
+# window.title('Hangman')
+
+
+
+# background = tkinter.PhotoImage(file = "h0.png")
+# background=background.zoom(0.5, 0.5) 
+# # Show image using label 
+# background_label = tkinter.Label(window, image=background) 
+# background_label.place(x = 0, y = 0) 
+
+# window.mainloop()
 
 # import random
 
