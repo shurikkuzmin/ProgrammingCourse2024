@@ -14,6 +14,9 @@ font_end = pygame.font.SysFont('Ariel',200)
 background = pygame.image.load("h0.png")
 background = pygame.transform.scale(background,(1000, 1000))
 
+batman = pygame.image.load("batman.png")
+batman = batman.subsurface((275,150,125,225))
+
 screen_width = background.get_width()
 screen_height = background.get_height()
 screen = pygame.display.set_mode((screen_width, screen_height))
@@ -55,6 +58,7 @@ while True:
         screen.blit(text,text_rect)
         end_of_game = True
     
+    screen.blit(batman,(200,200))
     pygame.display.update()
 
 # import tkinter
