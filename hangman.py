@@ -58,7 +58,12 @@ while True:
         screen.blit(text,text_rect)
         end_of_game = True
     
-    screen.blit(batman,(200,200))
+    batman_height = batman.get_height()
+    batman_width = batman.get_width()
+    delta_batman = batman_height / number_of_attempts
+    batman_temp = batman.subsurface((0,batman_height-int(attempt*delta_batman),batman_width,int(attempt*delta_batman)))   
+
+    screen.blit(batman_temp,(205,200 +batman_height-int(attempt*delta_batman)))
     pygame.display.update()
 
 # import tkinter
