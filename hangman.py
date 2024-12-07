@@ -3,13 +3,18 @@ import pygame.display
 import pygame.image
 import pygame.transform
 import pygame.font
+import pygame.time
 import random
+
 
 pygame.init()
 pygame.font.init() 
 
 font = pygame.font.SysFont('Comic Mono', 150)
 font_end = pygame.font.SysFont('Ariel',200)
+
+clock = pygame.time.Clock()
+fps = 120
 
 background = pygame.image.load("h0.png")
 background = pygame.transform.scale(background,(1000, 1000))
@@ -27,7 +32,9 @@ my_word = len(computer_word)*'*'
 number_of_attempts = int(1.4*len(computer_word))
 attempt = 0
 end_of_game = False
+letters_pressed = set()
 while True:
+    clock.tick(fps)
     screen.fill((102,2,60))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -35,6 +42,10 @@ while True:
             exit(0)
         if event.type == pygame.KEYDOWN and (not end_of_game):
             letter = pygame.key.name(event.key)
+            if not (letter in letters_pressed):
+                letters_pressed.add(letter)
+            else:
+                continue
             for i in range(len(computer_word)):
                 if letter == computer_word[i]:
                     my_word = my_word[:i]+letter+my_word[i+1:]
@@ -62,7 +73,6 @@ while True:
     batman_width = batman.get_width()
     delta_batman = batman_height / number_of_attempts
     batman_temp = batman.subsurface((0,batman_height-int(attempt*delta_batman),batman_width,int(attempt*delta_batman)))   
-
     screen.blit(batman_temp,(205,200 +batman_height-int(attempt*delta_batman)))
     pygame.display.update()
 
